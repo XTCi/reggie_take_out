@@ -2,13 +2,13 @@ package com.example.reggie_take_out.contorller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.reggie_take_out.common.R;
 import com.example.reggie_take_out.entity.Employee;
 import com.example.reggie_take_out.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.util.DigestUtils;
@@ -87,7 +87,7 @@ public class EmployeeController{
 //        构造分页构造器
         Page pageinfo = new Page(page,pageSize);
 //        构造条件构造器
-        LambdaQueryWrapper<Employee> queryWrapper = new LambdaQueryWrapper();
+        LambdaQueryWrapper<Employee> queryWrapper = new LambdaQueryWrapper<>();
 //        添加构造条件
         queryWrapper.like(StringUtils.isNotBlank(name),Employee::getName,name);
 //        添加排序条件
@@ -98,6 +98,12 @@ public class EmployeeController{
 
     }
 
+    /**
+     * 修改员工信息
+     * @param request
+     * @param employee
+     * @return
+     */
     @PutMapping
     public R<String> update(HttpServletRequest request,@RequestBody Employee employee){
         log.info(employee.toString());
